@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wędkarski Second Hand Sklep 🎣</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: url('https://images.unsplash.com/photo-1710273330112-1461aa903ac7?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
+
+/* Nagłówek */
+header {
+  background: rgba(0,0,0,0.7);
+  padding: 20px;
+  text-align: center;
+}
+header h1 { margin: 0; font-size: 2em; }
+
+/* Menu */
+nav {
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 12px;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+nav a:hover { color: #ffcc00; }
+
+/* Sekcje */
+section, main {
+  display: none;
+  padding: 30px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+.active { display: block; }
+
+/* Produkty */
+.product {
+  background: rgba(0,0,0,0.75);
+  padding: 15px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  margin: 15px;
+  display: inline-block;
+  box-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+.product img { width: 100%; border-radius: 8px; }
+.product button {
+  background-color: #ffcc00;
+  color: black;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.product button:hover { background-color: #ffaa00; }
+.product button:disabled { background: gray; color: #ccc; }
+
+/* Formularz zamówienia */
+#formularzZamowienia {
+  background: rgba(0,0,0,0.85);
+  border-radius: 15px;
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  display: none;
+}
+#formularzZamowienia h2 { text-align: center; color: #ffcc00; }
+#formularzZamowienia form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#formularzZamowienia input, #formularzZamowienia select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+#formularzZamowienia button {
+  background: #ffcc00;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#formularzZamowienia button:hover { background: #ffaa00; }
+
+/* Sekcja O nas */
+#onas {
+  background: rgba(0,0,0,0.8);
+  border-radius: 15px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  line-height: 1.7;
+}
+#onas h2 { color: #ffcc00; }
+
+/* Sekcja Opinie */
+#opinie {
+  background: rgba(0,0,0,0.85);
+  border-radius: 15px;
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+#opinie h2 { text-align: center; color: #ffcc00; }
+#opinie form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+#opinie input, #opinie textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+#opinie button {
+  background: #ffcc00;
+  color: black;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#opinie button:hover { background: #ffaa00; }
+.opinia {
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+/* Kontakt */
+#kontakt {
+  background: rgba(0,0,0,0.8);
+  border-radius: 15px;
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
+#kontakt form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+#kontakt input, #kontakt textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+#kontakt button {
+  background-color: #ffcc00;
+  color: black;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#kontakt button:hover { background-color: #ffaa00; }
+
+/* Stopka */
+footer {
+  background: rgba(0,0,0,0.8);
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9em;
+  margin-top: 30px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎣 Wędkarski Second Hand Sklep</h1>
+  <p>Używany sprzęt wędkarski w świetnym stanie – daj drugie życie swojemu hobby!</p>
+</header>
+
+<nav>
+  <a onclick="pokazSekcje('produkty')">Produkty</a>
+  <a onclick="pokazSekcje('onas')">O nas</a>
+  <a onclick="pokazSekcje('opinie')">Opinie</a>
+  <a onclick="pokazSekcje('kontakt')">Kontakt</a>
+</nav>
+
+<!-- Produkty -->
+<main id="produkty" class="active">
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1573821663917-2f7a2a0ff1f2?auto=format&fit=crop&w=700&q=80" alt="Wędka Shimano">
+    <h3>Wędka Shimano 2.4m</h3>
+    <p>Stan: bardzo dobry | Cena: 180 zł</p>
+    <button disabled>Kupiono ✅</button>
+  </div>
+
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1581948920588-24d0f84e3a77?auto=format&fit=crop&w=700&q=80" alt="Kołowrotek Daiwa">
+    <h3>Kołowrotek Daiwa</h3>
+    <p>Stan: używany | Cena: 120 zł</p>
+    <button onclick="pokazFormularzZamowienia()">Kup teraz</button>
+  </div>
+</main>
+
+<!-- Formularz zamówienia -->
+<section id="formularzZamowienia">
+  <h2>Formularz zamówienia</h2>
+  <form onsubmit="zlozZamowienie(event)">
+    <input type="text" id="zamImie" placeholder="Imię i nazwisko" required>
+    <input type="email" id="zamEmail" placeholder="E-mail" required>
+    <input type="text" id="zamAdres" placeholder="Adres zamieszkania" required>
+    <input type="text" id="zamKod" placeholder="Kod pocztowy (np. 00-000)" pattern="\\d{2}-\\d{3}" required>
+    <select id="zamDostawa" required>
+      <option value="">-- Wybierz sposób dostawy --</option>
+      <option>Paczkomat InPost</option>
+      <option>Kurier DPD</option>
+      <option>Odbiór osobisty</option>
+    </select>
+    <button type="submit">Zamów</button>
+  </form>
+</section>
+
+<!-- O nas -->
+<section id="onas">
+  <h2>O nas</h2>
+  <p><b>Wędkarski Second Hand</b> to wyjątkowe miejsce dla wszystkich, którzy kochają wędkarstwo i chcą oszczędzać. 
+  Oferujemy używany sprzęt wędkarski – wędki, kołowrotki, akcesoria – w doskonałym stanie i w atrakcyjnych cenach.</p>
+  <p>Każdy produkt jest sprawdzany przez doświadczonych wędkarzy, a Twoje zadowolenie jest naszym priorytetem. 
+  Wierzymy, że każdy sprzęt może dostać drugą szansę i służyć kolejnym pasjonatom!</p>
+</section>
+
+<!-- Opinie -->
+<section id="opinie">
+  <h2>Opinie klientów</h2>
+  <form onsubmit="dodajOpinie(event)">
+    <input type="text" id="opiniaImie" placeholder="Twoje imię" required>
+    <textarea id="opiniaTekst" rows="4" placeholder="Napisz swoją opinię..." required></textarea>
+    <button type="submit">Dodaj opinię</button>
+  </form>
+  <div id="listaOpinii"></div>
+</section>
+
+<!-- Kontakt -->
+<section id="kontakt">
+  <h2>✉️ Skontaktuj się z nami</h2>
+  <form onsubmit="wyslijWiadomosc(event)">
+    <input type="text" id="imie" placeholder="Twoje imię" required>
+    <input type="email" id="email" placeholder="Twój e-mail" required>
+    <textarea id="wiadomosc" rows="5" placeholder="Treść wiadomości..." required></textarea>
+    <button type="submit">Wyślij wiadomość</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2025 Wędkarski Second Hand Sklep | Kontakt: <a href="mailto:koziolw457@gmail.com">koziolw457@gmail.com</a></p>
+</footer>
+
+<script>
+function pokazSekcje(id) {
+  document.querySelectorAll("main, section").forEach(el => el.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function pokazFormularzZamowienia() {
+  document.querySelectorAll("main, section").forEach(el => el.classList.remove("active"));
+  document.getElementById("formularzZamowienia").style.display = "block";
+  document.getElementById("formularzZamowienia").classList.add("active");
+}
+
+function zlozZamowienie(e) {
+  e.preventDefault();
+  const imie = document.getElementById("zamImie").value;
+  const kod = document.getElementById("zamKod").value;
+  if(!/\\d{2}-\\d{3}/.test(kod)) {
+    alert("Podaj poprawny kod pocztowy!");
+    return;
+  }
+  alert(`Dziękujemy ${imie}! Zamówienie zostało przyjęte. Skontaktujemy się przez e-mail.`);
+  e.target.reset();
+  pokazSekcje('produkty');
+}
+
+function wyslijWiadomosc(e) {
+  e.preventDefault();
+  const imie = document.getElementById("imie").value;
+  alert(`Dziękujemy ${imie}! Twoja wiadomość została wysłana.`);
+  e.target.reset();
+}
+
+function dodajOpinie(e) {
+  e.preventDefault();
+  const imie = document.getElementById("opiniaImie").value;
+  const tekst = document.getElementById("opiniaTekst").value;
+  const div = document.createElement("div");
+  div.className = "opinia";
+  div.innerHTML = `<b>${imie}</b>: ${tekst}`;
+  document.getElementById("listaOpinii").prepend(div);
+  e.target.reset();
+}
+</script>
+
+</body>
+</html>
